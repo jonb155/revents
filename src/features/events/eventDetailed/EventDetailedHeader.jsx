@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
-
+import {format} from 'date-fns';
 const eventImageStyle = {
   filter: "brightness(30%)",
 };
@@ -19,7 +19,7 @@ export default function EventDetailedHeader({event}) {
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={`/assets/categoryImages/${event.category}.jpg`}
+          src={`/assets/categoryImages/${event?.category}.jpg`}
           fluid
           style={eventImageStyle}
         />
@@ -30,12 +30,12 @@ export default function EventDetailedHeader({event}) {
               <Item.Content>
                 <Header
                   size="huge"
-                  content={event.title}
+                  content={event?.title}
                   style={{ color: "white" }}
                 />
-                <p>{event.date}</p>
+                <p>{format(event.date, 'MMMM d, yyyy h:mm a')}</p>
                 <p>
-                  Hosted by <strong>{event.hostedBy}</strong>
+                  Hosted by <strong>{event?.hostedBy}</strong>
                 </p>
               </Item.Content>
             </Item>
@@ -47,7 +47,7 @@ export default function EventDetailedHeader({event}) {
         <Button>Cancel My Place</Button>
         <Button color="teal">JOIN THIS EVENT</Button>
 
-        <Button color="orange" floated="right" as={Link} to={`/manage/${event.id}`}>
+        <Button color="orange" floated="right" as={Link} to={`/manage/${event?.id}`}>
           Manage Event
         </Button>
       </Segment>
